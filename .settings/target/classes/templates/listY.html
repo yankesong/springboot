@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>用户列表</title>
+</head>
+<body>
+    <a href="/"><button>返回添加页面</button></a>
+    <div align="center">
+        <table style="border: 1px solid;">
+            <tr>
+                <th>姓名</th>
+                <th>电话</th>
+                <th>日期</th>
+                 <th>车型</th>
+            </tr>
+            <tr th:each="yuyue:${yuyueList}">
+                <td th:text="${yuyue.name}"></td>
+                <td th:text="${yuyue.phone}"></td>
+                <td th:text="${yuyue.date}"></td>
+                 <td th:text="${yuyue.cexin}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
