@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HTMLController {
     @Autowired
     private UserService userService;
-    @RequestMapping("/useList")
+    @RequestMapping("/userList")
     public String userList(){
         return "userlist";//返回对应的名为userlist的页面
     }

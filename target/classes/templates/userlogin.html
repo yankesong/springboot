@@ -29,39 +29,79 @@
             '#root', {
                 "$schema": "https://houtai.baidu.com/v2/schemas/page.json#",
                 "type": "page",
-                "title": "已注册用户",
+                "title": "汽车4S店登陆页面",
                 "body": [
                     {
-                        "type": "crud",
-                        "api": "http://localhost:8080/userList",
-                        "columns": [
+                        "type": "form",
+                        "title": "",
+                        "controls": [
                             {
-                                "name": "id",
-                                "label": "ID"
+                                "type": "carousel",
+                                "controlsTheme": "dark",
+                                "height": "300",
+                                "options": [
+                                    {
+                                        "image": "http://img1.gtimg.com/auto/pics/hv1/8/67/1681/109324118.jpg",
+                                        "title": ""
+                                    },
+                                    {
+                                        "image": "http://dealer2.autoimg.cn/dealerdfs/g24/M06/C0/64/autohomedealer__wKgHIVqx9seALGQ0ABa5PMgqqOE274.jpg"
+                                    },
+                                    {
+                                        "image": "http://e0.ifengimg.com/12/2019/0311/59CA6DF6C454EAE058A808865BD8462A0B3CD6E4_size873_w3136_h2352.jpeg"
+                                    },
+                                    {
+                                        "image": "http://img.zx123.cn/Resources/zx123cn/uploadfile/2016/0815/31c9a6bcc8a79ce4bfec5a7b3c27e70e.jpg"
+                                    }
+                                ],
+                                "interval": 4000,
+                                "duration": 500,
+                                "animation": "slide",
+                                "controls": "dots,arrows",
+                                "auto": true
                             },
                             {
-                                "name": "yname",
-                                "label": "用户名"
+                                "type": "divider"
                             },
                             {
-                                "name": "name",
-                                "label": "真实名"
-                            },
-                            {
-                                "name": "phone",
-                                "label": "真实电话"
-                            },
+                                "type": "group",
+                                "controls": [
+                                    {
+                                        "type": "hidden"
+                                    },
+                                    {
+                                        "label": "用户名",
+                                        "type": "text",
+                                        "name": "yname",
+                                        "required": true
+                                    },
+                                    {
+                                        "type": "hidden"
+                                    },
+                                    {
+                                        "label": "用户密码",
+                                        "type": "text",
+                                        "name": "password",
+                                        "required": true
+                                    },
+                                    {
+                                        "type": "hidden"
+                                    }
+                                ]
+                            }
+                        ],
+                        "actions": [
                             {
                                 "type": "button",
+                                "label": "注册",
                                 "actionType": "dialog",
-                                "icon": "fa fa-pencil",
                                 "dialog": {
-                                    "title": "更新",
+                                    "title": "新用户注册",
                                     "body": [
                                         {
                                             "type": "form",
                                             "title": "表单",
-                                            "api": "http://localhost:8080/userUpdate?yname=${yname}&password=${password}&name=${name}&phone=${phone}&id=${id}",
+                                            "api": "http://localhost:8080/userSave?yname=${yname}&password=${password}&name=${name}&phone=${phone}",
                                             "controls": [
                                                 {
                                                     "type": "group",
@@ -108,18 +148,15 @@
                                     "closeOnEsc": true,
                                     "showCloseButton": true
                                 },
-                                "level": "success",
-                                "label": "更新操作"
+                                "level": "success"
                             },
                             {
-                                "type": "button",
-                                "icon": "fa fa-times text-danger",
-                                "actionType": "ajax",
-                                "confirmText": "您确认要删除?",
-                                "api": "http://localhost:8080/userDelete?id=${id}",
-                                "label": "删除操作"
+                                "type": "submit",
+                                "label": "提交",
+                                "level": "primary"
                             }
-                        ]
+                        ],
+                        "wrapWithPanel": true
                     }
                 ]
             }

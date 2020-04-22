@@ -72,15 +72,16 @@ public class UserController {
      */
     @RequestMapping("/userUpdate")
     @ResponseBody
-    public User userUpdate(User user)
+    public ResponseBean userUpdate(User user, HttpServletRequest request, HttpServletResponse response)
     {
-    	
-    	user.setPhone("18656932566");
-		user.setName("小芳");
-		user.setPassword("sssc52.");
-        user.setYname("4511525689");
+        user.setId(Long.parseLong(request.getParameter("id")));
+        user.setPhone(request.getParameter("phone"));
+        user.setName(request.getParameter("name"));
+        user.setPassword(request.getParameter("password"));
+        user.setYname(request.getParameter("yname"));
+        User res = userService.update(user);
         
-    	return userService.update(user);
+    	return new ResponseBean<>(res);
     	
     }
     
@@ -89,12 +90,11 @@ public class UserController {
      * @return
      */
     @RequestMapping("/userDelete")
-    public 	User userDelete(User user)
+    public 	ResponseBean userDelete(User user, HttpServletRequest request, HttpServletResponse response)
     {
-    	
-    	userService.deleteById(user.getId());
-		return user;
-    	
+        Long id = Long.parseLong(request.getParameter("id"));
+        userService.deleteById(id);
+		return new ResponseBean<>(id);
     }
 
 
