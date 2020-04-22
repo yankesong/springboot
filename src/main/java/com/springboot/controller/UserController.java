@@ -1,6 +1,7 @@
 package com.springboot.controller;
  
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -58,9 +59,11 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/userList")
-	public List<User> userList(Model model, HttpServletRequest request, HttpServletResponse response) {
+	public ResponseBean userList(Model model, HttpServletRequest request, HttpServletResponse response) {
 	    List<User> userList = userService.getUserList();
-	    return userList;
+        HashMap<String, List<User>> res = new HashMap<>();
+        res.put("rows", userList);
+        return new ResponseBean<>(res);
 	}
 	
 	 /**

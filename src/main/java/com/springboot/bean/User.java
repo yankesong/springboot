@@ -70,8 +70,4 @@ public class User extends BaseBean {
 	public String toString() {
 		return "User [name=" + name + ", yname=" + yname + ", password=" + password + ", phone=" + phone + "]";
 	}
-
-	
- 
-
 }

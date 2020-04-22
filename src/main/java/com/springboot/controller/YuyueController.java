@@ -29,7 +29,7 @@ public class YuyueController {
 	@Autowired
 	private YuyueService yuyueservice;  
 	
-	@RequestMapping("/inde1")
+	@RequestMapping("/list")
 	public String inde1(Model model) {
 		model.addAttribute("name", "55k");
 		model.addAttribute("phone", 20);
@@ -37,7 +37,7 @@ public class YuyueController {
 		model.addAttribute("cexin", "一个爱学习的好青年");
 		
 		
-		return "inde1";
+		return "userlist.html";
 	}
 	
 
