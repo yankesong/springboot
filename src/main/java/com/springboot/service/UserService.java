@@ -28,6 +28,7 @@ public interface UserService {
 	void deleteById(Long id);/*删除*/
 	User findUserById(Integer id);/*根据id查询*/
 	List<User> findUserByName(String name);/*根据名字查询*/
+	List<User> findUserByYnameAndPassword(String yname, String password);/*根据名字查询*/
 	Page<User> findAll(int page,int pageSize);/*分页查询*/
 
 	

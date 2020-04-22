@@ -141,10 +141,22 @@ public class UserController {
         }else {
             page-=1;
         }
-            return userService.findAll(page,5);
+        return userService.findAll(page,5);
     }
 
 
+    /**
+     * 登陆
+     * @return
+     */
+    @RequestMapping("/userLogin")
+    public ResponseBean userLogin(User user, HttpServletRequest request, HttpServletResponse response)
+    {
+        String password = request.getParameter("password");
+        String yname = request.getParameter("yname");
+        List<User> userList = userService.findUserByYnameAndPassword(yname, password);
+        return new ResponseBean<>(userList);
+    }
 
 
 

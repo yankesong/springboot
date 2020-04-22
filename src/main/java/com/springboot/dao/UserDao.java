@@ -24,8 +24,6 @@ public interface UserDao extends CommonDao<User> {
      */
     @Query(name="findUserByName",nativeQuery = true,value = "select * from user where name=:name")
     List<User> findUserByName(@Param("name") String name);
-
-
-
- 
+    @Query(name="findUserByName",nativeQuery = true,value = "select * from user where yname=:yname and password=:password")
+    List<User> findUserByYnameAndPassword(@Param("yname") String yname, @Param("password") String password);
 }

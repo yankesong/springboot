@@ -1,9 +1,15 @@
 package com.springboot.controller;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.springboot.bean.ResponseBean;
+import com.springboot.bean.User;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.ui.Model;
@@ -34,15 +40,18 @@ public class BuyCarController {
 	
 	@RequestMapping("/buyCarSave")
 	//@ResponseBody
-	public BuyCar buyCarSave(BuyCar buyCar) {  
-		buyCar.setPhone("17863109700");
-		buyCar.setName("颜克松");
-		buyCar.setCexin("宝马x3");
-		buyCar.setDate(new Date());
-		buyCar.setMoney(120000);
-        buyCarService.save(buyCar); //将用户保存到数据库中
-		
-		return buyCarService.save(buyCar);
+	public ResponseBean buyCarSave(BuyCar buyCar, HttpServletRequest request, HttpServletResponse response) {
+		buyCar.setPhone(request.getParameter("phone"));
+		buyCar.setName(request.getParameter("name"));
+		buyCar.setCexin(request.getParameter("cexin"));
+        try {
+            buyCar.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("time")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        buyCar.setMoney(Double.parseDouble(request.getParameter("money")));
+        BuyCar res =  buyCarService.save(buyCar); //将用户保存到数据库中
+        return new ResponseBean<>(res);
 	}
 	
 	/**
@@ -51,28 +60,32 @@ public class BuyCarController {
 	 * @return
 	 */
 	@RequestMapping("/buyCarList")
-	public List<BuyCar> buyCarList(Model model) {
+	public ResponseBean buyCarList(Model model, HttpServletRequest request, HttpServletResponse response) {
 	    List<BuyCar> buyCarList = buyCarService.getBuyCarList();
-	
-	    return buyCarList;
+        HashMap<String, List<BuyCar>> res = new HashMap<>();
+        res.put("rows", buyCarList);
+        return new ResponseBean<>(res);
 	}
 	
 	 /**
      * 修改一条学生信息
-     * @param student  要修改的学生对象
      * @return
      */
     @RequestMapping("/buyCarUpdate")
-    public BuyCar buyCarUpdate(BuyCar buyCar)
+    public ResponseBean buyCarUpdate(BuyCar buyCar, HttpServletRequest request, HttpServletResponse response)
     {
-    	
-    	buyCar.setPhone("17852301365");
-		buyCar.setName("颜克松");
-		buyCar.setCexin("奥迪q5");
-        buyCar.setDate(new Date());
-        buyCar.setMoney(550000);
-        buyCarService.deleteById(2L);
-    	return buyCarService.update(buyCar);
+        buyCar.setId(Long.parseLong(request.getParameter("id")));
+        buyCar.setPhone(request.getParameter("phone"));
+        buyCar.setName(request.getParameter("name"));
+        buyCar.setCexin(request.getParameter("cexin"));
+        try {
+            buyCar.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("time")));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        buyCar.setMoney(Double.parseDouble(request.getParameter("money")));
+        BuyCar res = buyCarService.update(buyCar);
+        return new ResponseBean<>(res);
     	
     }
 
@@ -105,16 +118,15 @@ public class BuyCarController {
     }
     /**
      * 根据id删除
-     * @param upkeep
      * @return
      */
     @RequestMapping("/buyCarDelete")
-    public 	BuyCar buyCarDelete(BuyCar buyCar)
+    public 	ResponseBean buyCarDelete(BuyCar buyCar, HttpServletRequest request, HttpServletResponse response)
     {
-    	
-    	buyCarService.deleteById(buyCar.getId());
-		return buyCar;
-    	
+
+        Long id = Long.parseLong(request.getParameter("id"));
+        buyCarService.deleteById(id);
+        return new ResponseBean<>(id);
     }
     
     /**

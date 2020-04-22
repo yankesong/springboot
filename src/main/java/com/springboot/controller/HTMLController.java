@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class HTMLController {
     @Autowired
     private UserService userService;
+    @Autowired
+    private UserService buyCarService;
     @RequestMapping("/userList")
     public String userList(){
         return "userlist";//返回对应的名为userlist的页面
@@ -17,5 +19,13 @@ public class HTMLController {
     @RequestMapping("/userLogin")
     public String userLogin(){
         return "userlogin";//返回对应的名为userlogin的页面
+    }
+    @RequestMapping("/buycarSave")
+    public String buycarSave(){
+        return "buycarsave";//返回对应的名为buycarSave的页面
+    }
+    @RequestMapping("/buycarList")
+    public String buycarList(){
+        return "buycarlist";//返回对应的名为buycarlist的页面
     }
 }

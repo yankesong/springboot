@@ -60,7 +60,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<User> findUserByName(String name) {  //通过姓名查找用户
-		
 		 return userDao.findUserByName(name);
 	}
 
@@ -86,11 +85,11 @@ public class UserServiceImpl implements UserService {
 	}
 
 
-	
 
-	
-
-
+	@Override
+	public List<User> findUserByYnameAndPassword(String yname, String password) {  //通过姓名查找用户
+		return userDao.findUserByYnameAndPassword(yname, password);
+	}
 
 	
  
