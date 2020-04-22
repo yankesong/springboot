@@ -67,7 +67,7 @@ public class YuyueController {
 	@RequestMapping("/yuyueList")
 	public List<Yuyue> yuyueList(Model model) {
 	    List<Yuyue> yuyueList = yuyueservice.getYuYueList();
-	
+
 	    return yuyueList;
 	}
 	
@@ -103,7 +103,6 @@ public class YuyueController {
    
    /**
     * 根据id删除
-    * @param upkeep
     * @return
     */
    @RequestMapping("/yuyueDelete")

@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.springboot.bean.ResponseBean;
+import org.apache.catalina.servlet4preview.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.domain.Page;
@@ -15,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.springboot.bean.UpKeep;
 import com.springboot.bean.User;
 import com.springboot.service.UserService;
- /**
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+
+/**
   * 用户列表控制类，用来控制数据库，网页，服务端的工作
   * 
   */
@@ -26,10 +30,11 @@ import com.springboot.service.UserService;
 public class UserController {
  
 	@Autowired
-	private UserService userService;  
-	
-	
-	
+	private UserService userService;
+
+
+
+
      /**
       * 保存 将用户保存到数据库
       * @param user
@@ -38,14 +43,13 @@ public class UserController {
 	
 	@RequestMapping("/userSave")
 	//@ResponseBody
-	public User userSave(User user) {  
-		user.setPhone("18966547863");
-		user.setName("小红");
-		user.setPassword("ss4568");
-        user.setYname("1445689");
-		userService.save(user); //将用户保存到数据库中
-		
-		return userService.save(user);
+	public ResponseBean userSave(User user, HttpServletRequest request, HttpServletResponse response) {
+		user.setPhone(request.getParameter("phone"));
+		user.setName(request.getParameter("name"));
+		user.setPassword(request.getParameter("password"));
+        user.setYname(request.getParameter("yname"));
+		User res  = userService.save(user); //将用户保存到数据库中
+		return new ResponseBean<>(res);
 	}
 	
 	/**
@@ -54,15 +58,13 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/userList")
-	public List<User> userList(Model model) {
+	public List<User> userList(Model model, HttpServletRequest request, HttpServletResponse response) {
 	    List<User> userList = userService.getUserList();
-	
 	    return userList;
 	}
 	
 	 /**
      * 修改一条学生信息
-     * @param student  要修改的学生对象
      * @return
      */
     @RequestMapping("/userUpdate")
@@ -81,7 +83,6 @@ public class UserController {
     
     /**
      * 根据id删除
-     * @param upkeep
      * @return
      */
     @RequestMapping("/userDelete")
