@@ -151,9 +151,14 @@
                                 "level": "success"
                             },
                             {
-                                "type": "submit",
-                                "label": "提交",
-                                "level": "primary"
+                                "$schema": "https://houtai.baidu.com/v2/schemas/action.json#",
+                                "type": "button",
+                                "label": "登陆",
+                                "level": "primary",
+                                "actionType": "ajax",
+                                "confirmText": "您确认要登陆?",
+                                "api": "http://localhost:8080/userLogin?yname=${yname}&password=${password}",
+                                "redirect": "http://localhost:8080/page/buycarSave"
                             }
                         ],
                         "wrapWithPanel": true

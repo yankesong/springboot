@@ -1,4 +1,5 @@
 package com.springboot.controller;
+import com.springboot.service.BuyCarService;
 import com.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -11,7 +12,7 @@ public class HTMLController {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserService buyCarService;
+    private BuyCarService buyCarService;
     @RequestMapping("/userList")
     public String userList(){
         return "userlist";//返回对应的名为userlist的页面
